@@ -19,7 +19,7 @@ export async function GET(request) {
     const summarise = await PipelineSingleton.getInstance(task, model);
 
     const result = await summarise(text, {
-        min_new_tokens: 100
+        max_new_tokens: 500,
     });
 
     return NextResponse.json(result);

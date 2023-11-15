@@ -15,9 +15,12 @@ export async function GET(request) {
         }, { status: 400 });
     }
 
-    const translator = await PipelineSingleton.getInstance('translation', `Xenova/opus-mt-es-en`);
-    
-    const result = await translator(text);
+    const translator = await PipelineSingleton.getInstance('translation', `Xenova/nllb-200-distilled-600M`);
+
+    const result = await translator(text, {
+        src_lang: from, 
+        tgt_lang: to,
+    });
 
     return NextResponse.json(result);
 }
